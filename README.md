@@ -1,47 +1,110 @@
-# Description
-In light of the difficulty of following up on student attendance to increase numbers, we decided to create an application to help record attendance quickly and effectively
+# Student Attendance Management System
 
-# Features
+[![Build](https://github.com/MahmoudAlmodalal/student-attendance-management-system/actions/workflows/build.yml/badge.svg)](https://github.com/MahmoudAlmodalal/student-attendance-management-system/actions/workflows/build.yml)
+[![Project Page](https://img.shields.io/badge/project-page-2463EB?logo=github)](https://mahmoudalmodalal.github.io/student-attendance-management-system/)
 
-- Creating and editing a course and adding its details
-- Create user accounts so that teacher assistant can use the system.
-- Adding and editing lectures within a specific course and adding lecture details
-- Registering and editing students of all genders
-- Recording a particular student's affiliation to a particular course
-- Recording and editing their attendance at lectures.
-- View the attendance and absence statements for each of the lectures
-- Display all lectures belonging to a particular course.
-- Quickly view the attendance report for each student in a particular course
-- Search for a specific lecture reveal using the title of the lecture.
-- Extracting a list of all students who are not committed to attending more than 25% of the lectures in a particular course
+A modular **JavaFX desktop application** for managing university courses, teaching assistants, students, lectures, attendance records, and exportable reports.
 
-# Tech Used
+> **Live project page:** [mahmoudalmodalal.github.io/student-attendance-management-system](https://mahmoudalmodalal.github.io/student-attendance-management-system/)
+>
+> The application itself is desktop-based and cannot run directly inside a browser. The live page is therefore a responsive project showcase and setup hub, while the full application runs locally with JavaFX.
 
-1- IntelliJ IDEA 2022.3.2
-2- SceneBuilder
-3- fxml
-4- openjdk-20
-      
-# Add More Details:
+## Features
 
-The program is made to be easy to use by users,so you want to know the first step to start treat with programme :
-- Step 1: System Manger : users "a" ----- password "a" 
-- Step 2: add course so we can add teacher assistant 
-- Step 3: choose a userName and password for teacher assistant
-- Step 4: then teacher assistant can login in app by enter own password and username for him
-- Step 5: now teacher assistant can add lecture or update it and you can add student and so on 
-now you can to treat with my programe
+The system provides a complete attendance workflow for two roles:
 
+| Area | Capabilities |
+| --- | --- |
+| Course management | Create, update, remove, search, and assign courses. |
+| User management | Manage system-manager and teaching-assistant accounts. |
+| Student management | Register, update, remove, and assign students to courses. |
+| Lecture management | Add, edit, remove, and list lectures within a course. |
+| Attendance | Record, remove, import, and review attendance by lecture. |
+| Reporting | Export lecture attendance, individual student summaries, and students at or below the 25% attendance threshold. |
+| Persistence | Save local application data under `StudentAttendanc/data/attendance-data.dat`. |
 
-### You can add How to Setup:
-- Step 1: Decompress the project
-- Step 2: Read the README.md file
-- Step 3: Show UML.png img to uml
-- Step 3: use IntelliJ IDEA to run app
-- Steo 4: add depandance of Libraries (javafx, jxl, poi) show module-info.png to knew it
+## Technology Stack
 
-### You can add API references
+| Component | Technology |
+| --- | --- |
+| Language | Java 21 |
+| UI | JavaFX 21 with FXML |
+| Build | Apache Maven |
+| Spreadsheet reports | Apache POI 5.4.1 |
+| Architecture | Java modules with MVC-style controllers and models |
+| Documentation | GitHub Pages |
 
-1- javafx-sdk-20.0.1
-2- jxl-2.6.9
-3- poi    
+## Requirements
+
+Install **JDK 21** and **Maven 3.8+**. An IDE such as IntelliJ IDEA with JavaFX support is optional; the project can be built from the command line.
+
+## Quick Start
+
+```bash
+git clone https://github.com/MahmoudAlmodalal/student-attendance-management-system.git
+cd student-attendance-management-system/StudentAttendanc
+mvn clean javafx:run
+```
+
+To build the project without launching the UI:
+
+```bash
+mvn clean package
+```
+
+The JavaFX Maven plugin downloads the required platform-specific JavaFX artifacts automatically. The application stores local data in the ignored `data/` directory after the first save.
+
+## Default Login
+
+A fresh installation initializes the system-manager account with the following credentials:
+
+| Field | Value |
+| --- | --- |
+| Username | `admin` |
+| Password | `admin@gmail.com` |
+
+Change the credentials from the system-manager screen after the first login. Teaching-assistant accounts can be created after a course has been registered.
+
+## Project Structure
+
+```text
+student-attendance-management-system/
+├── StudentAttendanc/
+│   ├── pom.xml
+│   └── src/
+│       └── main/
+│           ├── java/
+│           │   ├── module-info.java
+│           │   └── com/studentattendance/
+│           │       ├── controllers/
+│           │       └── models/
+│           └── resources/
+│               └── com/studentattendance/
+│                   ├── images/
+│                   └── views/
+├── docs/
+│   ├── index.html
+│   └── assets/
+└── .github/workflows/build.yml
+```
+
+## Architecture
+
+The application separates JavaFX event handling into controllers, domain and persistence logic into models, and screen layout into FXML resources. Navigation is centralized in `Navigation.java`, while `DataModel.java` provides local serialization and safe initialization of the application state.
+
+The original Excel export implementation was consolidated on Apache POI. This removes the obsolete JXL dependency and provides a single maintained library for report generation and attendance import.
+
+![UML diagram](docs/assets/UML.png)
+
+## GitHub Pages
+
+The static project page is stored in [`docs/index.html`](docs/index.html) and is designed to be published from the `main` branch using the `/docs` folder. It includes the project overview, feature summary, setup instructions, default login information, architecture diagrams, and a direct link back to the source repository.
+
+## Continuous Integration
+
+Every push and pull request targeting `main` runs `.github/workflows/build.yml`. The workflow installs Java 21, enables Maven dependency caching, and executes `mvn clean package` from the `StudentAttendanc` module.
+
+## License
+
+No license has been specified yet. Add a license file before distributing the application publicly.
+    
