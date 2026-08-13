@@ -1,13 +1,13 @@
 # Student Attendance Management System
 
 [![Build](https://github.com/MahmoudAlmodalal/student-attendance-management-system/actions/workflows/build.yml/badge.svg)](https://github.com/MahmoudAlmodalal/student-attendance-management-system/actions/workflows/build.yml)
-[![Project Page](https://img.shields.io/badge/project-page-2463EB?logo=github)](https://mahmoudalmodalal.github.io/student-attendance-management-system/)
+[![Live Showcase](https://img.shields.io/badge/live-showcase-2463EB?logo=vercel)](https://raw.githack.com/MahmoudAlmodalal/student-attendance-management-system/main/docs/index.html)
 
 A modular **JavaFX desktop application** for managing university courses, teaching assistants, students, lectures, attendance records, and exportable reports.
 
-> **Live project page:** [mahmoudalmodalal.github.io/student-attendance-management-system](https://mahmoudalmodalal.github.io/student-attendance-management-system/)
+> **Live showcase:** [Open the public project page](https://raw.githack.com/MahmoudAlmodalal/student-attendance-management-system/main/docs/index.html)
 >
-> The application itself is desktop-based and cannot run directly inside a browser. The live page is therefore a responsive project showcase and setup hub, while the full application runs locally with JavaFX.
+> The application itself is desktop-based and cannot run directly inside a browser. The public page is therefore a responsive project showcase and setup hub, while the full application runs locally with JavaFX.
 
 ## Features
 
@@ -32,7 +32,7 @@ The system provides a complete attendance workflow for two roles:
 | Build | Apache Maven |
 | Spreadsheet reports | Apache POI 5.4.1 |
 | Architecture | Java modules with MVC-style controllers and models |
-| Documentation | GitHub Pages |
+| Documentation | Static `docs/` page with public showcase link |
 
 ## Requirements
 
@@ -96,9 +96,9 @@ The original Excel export implementation was consolidated on Apache POI. This re
 
 ![UML diagram](docs/assets/UML.png)
 
-## GitHub Pages
+## Project Page
 
-The static project page is stored in [`docs/index.html`](docs/index.html) and is designed to be published from the `main` branch using the `/docs` folder. It includes the project overview, feature summary, setup instructions, default login information, architecture diagrams, and a direct link back to the source repository.
+The static project page is stored in [`docs/index.html`](docs/index.html). A public preview is available through [this live showcase link](https://raw.githack.com/MahmoudAlmodalal/student-attendance-management-system/main/docs/index.html), while the source remains fully versioned inside the repository. The page includes the project overview, feature summary, setup instructions, default login information, architecture diagrams, and a direct link back to the source repository. The `docs/` folder is also ready to be used as the source for GitHub Pages when Pages administration is enabled for the repository.
 
 ## Continuous Integration
 
