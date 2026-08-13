@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootPane" prefHeight="450" prefWidth="750" style="-fx-background-color: #263F73;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.studentattendance.controllers.StartController">
+   <GridPane alignment="CENTER" layoutX="199.0" layoutY="182.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="166.0" prefWidth="513.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="150.0">
+     <columnConstraints>
+       <ColumnConstraints hgrow="SOMETIMES" maxWidth="324.00001525878906" minWidth="10.0" prefWidth="255.39998779296874" />
+       <ColumnConstraints hgrow="SOMETIMES" maxWidth="428.59997863769536" minWidth="10.0" prefWidth="257.0000122070312" />
+     </columnConstraints>
+     <rowConstraints>
+       <RowConstraints maxHeight="65.60000610351562" minHeight="10.0" prefHeight="55.999975585937506" vgrow="SOMETIMES" />
+       <RowConstraints maxHeight="56.00002441406251" minHeight="10.0" prefHeight="56.00002441406251" vgrow="SOMETIMES" />
+     </rowConstraints>
+      <children>
+         <Label alignment="CENTER" prefHeight="28.0" prefWidth="283.0" text="User name: " textFill="WHITE">
+            <font>
+               <Font name="Times New Roman Bold" size="24.0" />
+            </font>
+            <effect>
+               <DropShadow />
+            </effect>
+         </Label>
+         <Label alignment="CENTER" prefHeight="28.0" prefWidth="293.0" text="Password: " textFill="WHITE" GridPane.rowIndex="1">
+            <font>
+               <Font name="Times New Roman Bold" size="24.0" />
+            </font>
+            <effect>
+               <DropShadow />
+            </effect>
+         </Label>
+         <PasswordField fx:id="password" maxWidth="180.0" prefHeight="26.0" promptText="Enter your password" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <cursor>
+               <Cursor fx:constant="TEXT" />
+            </cursor>
+            <effect>
+               <DropShadow />
+            </effect></PasswordField>
+         <TextField fx:id="userName" maxWidth="180.0" prefHeight="26.0" prefWidth="180.0" promptText="Enter user name" GridPane.columnIndex="1">
+            <cursor>
+               <Cursor fx:constant="TEXT" />
+            </cursor>
+            <effect>
+               <DropShadow />
+            </effect></TextField>
+      </children>
+   </GridPane>
+     <Label alignment="CENTER" layoutX="272.0" layoutY="94.0" text="Login page" textFill="WHITE" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="75.0">
+         <font>
+             <Font name="Times New Roman Bold Italic" size="48.0" />
+         </font>
+      <effect>
+         <DropShadow />
+      </effect>
+     </Label>
+   <HBox alignment="CENTER" layoutY="310.0" prefHeight="100.0" prefWidth="752.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+      <children>
+         <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="44.0" maxWidth="106.0" mnemonicParsing="false" onAction="#onLogin" prefHeight="44.0" prefWidth="106.0" text="Log in">
+            <font>
+               <Font name="Times New Roman Bold" size="24.0" />
+            </font>
+             <cursor>
+                 <Cursor fx:constant="HAND" />
+             </cursor>
+            <effect>
+               <DropShadow />
+            </effect>
+         </Button>
+      </children>
+   </HBox>
+</AnchorPane>

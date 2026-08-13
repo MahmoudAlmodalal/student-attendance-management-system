@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootPane" prefHeight="450.0" prefWidth="750.0" style="-fx-background-color: #E6E6FA;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.studentattendance.controllers.TeacherAssistantController">
+    <children>
+        <GridPane alignment="CENTER" layoutX="99.0" layoutY="126.0" prefHeight="106.0" prefWidth="327.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="100.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="163.20001220703125" minWidth="10.0" prefWidth="112.80001220703124" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="322.3999877929687" minWidth="7.20001220703125" prefWidth="99.20000000000002" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="322.3999877929687" minWidth="0.0" prefWidth="125.59999999999997" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="322.3999877929687" minWidth="10.0" prefWidth="105.40001220703124" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="322.3999877929687" minWidth="10.0" prefWidth="79.19998779296878" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+                <RowConstraints maxHeight="87.5999755859375" minHeight="10.0" prefHeight="87.5999755859375" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="121.59999084472656" minHeight="10.0" prefHeight="91.20002441406251" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="196.20001831054685" minHeight="10.0" prefHeight="99.99997558593753" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label prefHeight="34.0" prefWidth="95.0" text="Student : " GridPane.rowIndex="1">
+                    <font>
+                        <Font name="Times New Roman Bold" size="18.0" />
+                    </font>
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+                </Label>
+                <Label prefHeight="34.0" prefWidth="97.0" text="Lecture: " GridPane.rowIndex="2">
+                    <font>
+                        <Font name="Times New Roman Bold" size="18.0" />
+                    </font>
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+                </Label>
+                  <Button mnemonicParsing="false" onAction="#onAddStudent" prefHeight="33.0" prefWidth="84.0" text="Add" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                      <font>
+                          <Font name="Times New Roman Bold" size="18.0" />
+                      </font>
+                      <cursor>
+                          <Cursor fx:constant="HAND" />
+                      </cursor>
+                      <effect>
+                          <DropShadow>
+                              <color>
+                                  <Color red="0.5058823823928833" green="0.49803921580314636" blue="0.49803921580314636" />
+                              </color>
+                          </DropShadow>
+                      </effect>
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#onUpdateStudent" prefHeight="34.0" prefWidth="102.0" text="Update" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                      <font>
+                          <Font name="Times New Roman Bold" size="18.0" />
+                      </font>
+                      <cursor>
+                          <Cursor fx:constant="HAND" />
+                      </cursor>
+                      <effect>
+                          <DropShadow>
+                              <color>
+                                  <Color red="0.5058823823928833" green="0.49803921580314636" blue="0.49803921580314636" />
+                              </color>
+                          </DropShadow>
+                      </effect>
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#onRemoveStudent" prefHeight="34.0" prefWidth="94.0" text="Remove" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                      <font>
+                          <Font name="Times New Roman Bold" size="18.0" />
+                      </font>
+                      <cursor>
+                          <Cursor fx:constant="HAND" />
+                      </cursor>
+                      <effect>
+                          <DropShadow>
+                              <color>
+                                  <Color red="0.5058823823928833" green="0.49803921580314636" blue="0.49803921580314636" />
+                              </color>
+                          </DropShadow>
+                      </effect>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#onAddLecture" prefHeight="33.0" prefWidth="84.0" text="Add" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                      <font>
+                          <Font name="Times New Roman Bold" size="18.0" />
+                      </font>
+                      <cursor>
+                          <Cursor fx:constant="HAND" />
+                      </cursor>
+                      <effect>
+                          <DropShadow>
+                              <color>
+                                  <Color red="0.5058823823928833" green="0.49803921580314636" blue="0.49803921580314636" />
+                              </color>
+                          </DropShadow>
+                      </effect>
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#onUpdateLecture" prefHeight="34.0" prefWidth="102.0" text="Update" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                      <font>
+                          <Font name="Times New Roman Bold" size="18.0" />
+                      </font>
+                      <cursor>
+                          <Cursor fx:constant="HAND" />
+                      </cursor>
+                      <effect>
+                          <DropShadow>
+                              <color>
+                                  <Color red="0.5058823823928833" green="0.49803921580314636" blue="0.49803921580314636" />
+                              </color>
+                          </DropShadow>
+                      </effect>
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#onRemoveLecture" prefHeight="33.0" prefWidth="94.0" text="Remove" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                      <font>
+                          <Font name="Times New Roman Bold" size="18.0" />
+                      </font>
+                      <cursor>
+                          <Cursor fx:constant="HAND" />
+                      </cursor>
+                      <effect>
+                          <DropShadow>
+                              <color>
+                                  <Color red="0.5058823823928833" green="0.49803921580314636" blue="0.49803921580314636" />
+                              </color>
+                          </DropShadow>
+                      </effect>
+                  </Button>
+              <Button mnemonicParsing="false" onAction="#onBack" prefHeight="33.0" prefWidth="84.0" text="Back" GridPane.rowIndex="3">
+                  <font>
+                      <Font name="Times New Roman Bold" size="18.0" />
+                  </font>
+                  <cursor>
+                      <Cursor fx:constant="HAND" />
+                  </cursor>
+                  <effect>
+                      <DropShadow>
+                          <color>
+                              <Color red="0.5058823823928833" green="0.49803921580314636" blue="0.49803921580314636" />
+                          </color>
+                      </DropShadow>
+                  </effect>
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+              </Button>
+              <Button mnemonicParsing="false" onAction="#onAttendance" prefHeight="34.0" prefWidth="115.0" text="Attendance" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                  <font>
+                      <Font name="Times New Roman Bold" size="18.0" />
+                  </font>
+                  <cursor>
+                      <Cursor fx:constant="HAND" />
+                  </cursor>
+                  <effect>
+                      <DropShadow>
+                          <color>
+                              <Color red="0.5058823823928833" green="0.49803921580314636" blue="0.49803921580314636" />
+                          </color>
+                      </DropShadow>
+                  </effect>
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+              </Button>
+              <Button mnemonicParsing="false" onAction="#onReports" prefHeight="34.0" prefWidth="98.0" text="Reports" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <font>
+                      <Font name="Times New Roman Bold" size="18.0" />
+                  </font>
+                  <cursor>
+                      <Cursor fx:constant="HAND" />
+                  </cursor>
+                  <effect>
+                      <DropShadow>
+                          <color>
+                              <Color red="0.5058823823928833" green="0.49803921580314636" blue="0.49803921580314636" />
+                          </color>
+                      </DropShadow>
+                  </effect>
+              </Button>
+            <Button mnemonicParsing="false" onAction="#onShowStudent" prefHeight="33.0" prefWidth="84.0" text="Show" GridPane.columnIndex="4" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Times New Roman Bold" size="18.0" />
+               </font>
+                <cursor>
+                    <Cursor fx:constant="HAND" />
+                </cursor>
+                <effect>
+                    <DropShadow>
+                        <color>
+                            <Color red="0.5058823823928833" green="0.49803921580314636" blue="0.49803921580314636" />
+                        </color>
+                    </DropShadow>
+                </effect>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#onShowLecture" prefHeight="33.0" prefWidth="84.0" text="Show" GridPane.columnIndex="4" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Times New Roman Bold" size="18.0" />
+               </font>
+                <cursor>
+                    <Cursor fx:constant="HAND" />
+                </cursor>
+                <effect>
+                    <DropShadow>
+                        <color>
+                            <Color red="0.5058823823928833" green="0.49803921580314636" blue="0.49803921580314636" />
+                        </color>
+                    </DropShadow>
+                </effect>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#onEditTeacherAssistant" prefHeight="34.0" prefWidth="111.0" text="Edite info" GridPane.columnIndex="3" GridPane.rowIndex="3">
+               <font>
+                  <Font name="Times New Roman Bold" size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.5058823823928833" green="0.49803921580314636" blue="0.49803921580314636" />
+                     </color>
+                  </DropShadow>
+               </effect>
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+            </Button>
+            </children>
+        </GridPane>
+        <Label alignment="CENTER" layoutX="159.0" layoutY="46.0" text="TeacherAssistant" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="40.0">
+            <font>
+                <Font name="Times New Roman Bold Italic" size="36.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>
