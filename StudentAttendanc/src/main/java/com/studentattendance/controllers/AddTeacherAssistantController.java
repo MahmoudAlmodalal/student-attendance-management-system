@@ -70,7 +70,7 @@ public class AddTeacherAssistantController implements Initializable {
         }
     }
     public void onBack() {
-        navigation.navigateTo(rootPane, navigation.SYSTEM_MANGER_FXML);
+        navigation.navigateTo(rootPane, navigation.SYSTEM_MANAGER_FXML);
     }
     private boolean isExist() {
         for (TeacherAssistant teacherAssistant : model.getTeacherAssistants()) {

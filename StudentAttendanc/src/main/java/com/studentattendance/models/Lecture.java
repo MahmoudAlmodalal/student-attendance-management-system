@@ -1,18 +1,17 @@
 package com.studentattendance.models;
 
-import jxl.Workbook;
-import jxl.write.Label;
-import jxl.write.WritableSheet;
-import jxl.write.WritableWorkbook;
-import jxl.write.WriteException;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 
-import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 
@@ -101,51 +100,47 @@ public class Lecture implements Serializable{
             }
         }
     }
-    public WritableWorkbook getExcelAttendance(String path) {
-        try {
+    public void exportAttendance(String path) throws IOException {
+        Path outputFile = Paths.get(path).resolve(safeFileName(getName()) + "-attendance.xls");
+        Files.createDirectories(outputFile.getParent());
 
-            WritableWorkbook excelAttendance = Workbook.createWorkbook(new File(path + "/" + getName() + "studentAttendance.xls"));
-            WritableSheet excelSheet = excelAttendance.createSheet("Sheet 1", 0);
-            excelSheet.addCell(new Label(0, 0, "id"));
-            excelSheet.addCell(new Label(1, 0, "Student Name"));
-            excelSheet.addCell(new Label(2, 0, "Attendance"));
+        try (HSSFWorkbook workbook = new HSSFWorkbook();
+             FileOutputStream output = new FileOutputStream(outputFile.toFile())) {
+            HSSFSheet sheet = workbook.createSheet("Attendance");
+            Row header = sheet.createRow(0);
+            header.createCell(0).setCellValue("Student ID");
+            header.createCell(1).setCellValue("Student Name");
+            header.createCell(2).setCellValue("Attendance");
 
             ArrayList<Student> students = getCourse().getStudents();
-
-            for (int i = 0; i < students.size(); i++) {
-                Student student = students.get(i);
-                String studentId = student.getId();
-                String studentName = student.getName();
-
-                Label label1 = new Label(0, i + 1, studentId);
-                excelSheet.addCell(label1);
-
-                Label label2 = new Label(1, i + 1, studentName);
-                excelSheet.addCell(label2);
-
-                Label label3 = new Label(2, i + 1, (getLectureAttendanceById(studentId) != null) ? "1" : "0");
-                excelSheet.addCell(label3);
+            for (int index = 0; index < students.size(); index++) {
+                Student student = students.get(index);
+                Row row = sheet.createRow(index + 1);
+                row.createCell(0).setCellValue(student.getId());
+                row.createCell(1).setCellValue(student.getName());
+                row.createCell(2).setCellValue(getLectureAttendanceById(student.getId()) != null ? "Present" : "Absent");
             }
-            Label label4 = new Label(3, 1, "Ratio Attendance: ");
-            excelSheet.addCell(label4);
 
-            Label label5 = new Label(4, 1, ((getLectureAttendance().size() * 100) / (students.size())) + "%");
-            excelSheet.addCell(label5);
+            int summaryRow = students.size() + 2;
+            Row attendanceSummary = sheet.createRow(summaryRow);
+            attendanceSummary.createCell(0).setCellValue("Attendance ratio");
+            double ratio = students.isEmpty() ? 0 : (getLectureAttendance().size() * 100.0) / students.size();
+            attendanceSummary.createCell(1).setCellValue(String.format("%.1f%%", ratio));
+            Row countSummary = sheet.createRow(summaryRow + 1);
+            countSummary.createCell(0).setCellValue("Number present");
+            countSummary.createCell(1).setCellValue(getLectureAttendance().size());
 
-            Label label6 = new Label(3, 2, "Number Of Attendance: ");
-            excelSheet.addCell(label6);
-
-            Label label7 = new Label(4, 2, getLectureAttendance().size() + "");
-            excelSheet.addCell(label7);
-
-            excelAttendance.write();
-            excelAttendance.close();
-            return excelAttendance;
+            for (int column = 0; column < 3; column++) {
+                sheet.autoSizeColumn(column);
+            }
+            workbook.write(output);
         }
-        catch (IOException | WriteException e) {
-            e.printStackTrace();
-        }
-        return null;
+    }
+
+    private String safeFileName(String value) {
+        return value == null || value.isBlank()
+                ? "lecture"
+                : value.replaceAll("[\\\\/:*?\"<>|]", "_");
     }
 
     @Override

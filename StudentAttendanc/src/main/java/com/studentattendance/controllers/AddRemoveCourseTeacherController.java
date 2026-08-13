@@ -42,6 +42,6 @@ public class AddRemoveCourseTeacherController {
         }
     }
     public void onBack() {
-        navigation.navigateTo(rootPane, navigation.SYSTEM_MANGER_FXML);
+        navigation.navigateTo(rootPane, navigation.SYSTEM_MANAGER_FXML);
     }
 }

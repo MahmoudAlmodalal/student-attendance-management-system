@@ -28,7 +28,7 @@ public class StartController {
                 && systemManager.getPassword() != null
                 && systemManager.getUserName().equals(userName.getText())
                 && systemManager.getPassword().equals(password.getText())) {
-            navigation.navigateTo(rootPane, navigation.SYSTEM_MANGER_FXML);
+            navigation.navigateTo(rootPane, navigation.SYSTEM_MANAGER_FXML);
             found = true;
         } else {
             for (TeacherAssistant teacherAssistants : model.getTeacherAssistants()) {

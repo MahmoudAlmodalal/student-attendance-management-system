@@ -53,6 +53,6 @@ public class TeacherAssistantController {
     }
 
     public void onEditTeacherAssistant() {
-        navigation.navigateTo(rootPane, navigation.EDITE_TEACHER_ASSISTANT_FXML);
+        navigation.navigateTo(rootPane, navigation.EDIT_TEACHER_ASSISTANT_FXML);
     }
 }

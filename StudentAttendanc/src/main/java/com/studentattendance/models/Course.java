@@ -1,13 +1,13 @@
 package com.studentattendance.models;
-import jxl.Workbook;
-import jxl.write.Label;
-import jxl.write.WritableSheet;
-import jxl.write.WritableWorkbook;
-import jxl.write.WriteException;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
 
-import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class Course implements Serializable {
@@ -164,29 +164,29 @@ public class Course implements Serializable {
         }
         return studentUnder25;
     }
-    public WritableWorkbook getExcelStudentUnder25(String path) throws IOException, WriteException {
-        File file = new File(path + "/studentUnder25%.xls");
-        WritableWorkbook excelStudentUnder25 = Workbook.createWorkbook(file);
-        WritableSheet excelSheet = excelStudentUnder25.createSheet(getSubject(), 0);
-        excelSheet.addCell(new Label(0, 0, "id"));
-        excelSheet.addCell(new Label(1, 0, "Student Name"));
-        ArrayList<Student> students =this.getStudentsUnder25();
-        for (int i = 0; i < students.size(); i++) {
-            Student student = students.get(i);
-            String studentId = student.getId();
-            String studentName = student.getName();
+    public void exportStudentsUnder25(String path) throws IOException {
+        Path outputFile = Paths.get(path).resolve("students-under-25-percent.xls");
+        Files.createDirectories(outputFile.getParent());
 
+        try (HSSFWorkbook workbook = new HSSFWorkbook();
+             FileOutputStream output = new FileOutputStream(outputFile.toFile())) {
+            var sheet = workbook.createSheet(getSubject());
+            Row header = sheet.createRow(0);
+            header.createCell(0).setCellValue("Student ID");
+            header.createCell(1).setCellValue("Student Name");
 
-            Label label1 = new Label(0, i + 1, studentId);
-            excelSheet.addCell(label1);
+            ArrayList<Student> under25 = getStudentsUnder25();
+            for (int index = 0; index < under25.size(); index++) {
+                Student student = under25.get(index);
+                Row row = sheet.createRow(index + 1);
+                row.createCell(0).setCellValue(student.getId());
+                row.createCell(1).setCellValue(student.getName());
+            }
 
-            Label label2 = new Label(1, i + 1, studentName);
-            excelSheet.addCell(label2);
+            sheet.autoSizeColumn(0);
+            sheet.autoSizeColumn(1);
+            workbook.write(output);
         }
-
-        excelStudentUnder25.write();
-        excelStudentUnder25.close();
-        return excelStudentUnder25;
     }
 
     @Override

@@ -1,9 +1,7 @@
 module com.studentattendance {
     requires javafx.controls;
     requires javafx.fxml;
-    requires jxl;
-    requires poi;
-
+    requires org.apache.poi.poi;
 
     exports com.studentattendance;
     opens com.studentattendance to javafx.fxml;

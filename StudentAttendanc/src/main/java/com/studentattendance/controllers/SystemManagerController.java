@@ -38,7 +38,7 @@ public class SystemManagerController {
     }
 
     public void onEditSystemManager() {
-        navigation.navigateTo(rootPane, navigation.EDIT_SYSTEM_MANGER_FXML);
+        navigation.navigateTo(rootPane, navigation.EDIT_SYSTEM_MANAGER_FXML);
     }
 
     public void onAddCourseToTeacher() {

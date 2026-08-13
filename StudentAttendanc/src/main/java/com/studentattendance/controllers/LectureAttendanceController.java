@@ -14,15 +14,17 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
-import jxl.Workbook;
-import jxl.write.WritableSheet;
-import jxl.write.WritableWorkbook;
-import jxl.write.WriteException;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -153,45 +155,54 @@ public class LectureAttendanceController implements Initializable {
         LectureAttendanceController.lectureName = lecture;
     }
 
-    public WritableWorkbook onStudentAttendance() {
-        String studentId;
-        if (search.getValue() != null) {
-            studentId = search.getValue().split(", ")[0];
+    public void onStudentAttendance() {
+        if (search.getValue() == null) {
+            MyAlert.errorAlert("You must select a student", "Error", null);
+            return;
         }
-        else {
-            MyAlert.errorAlert("You must enter the id of student", "Error", null);
-            return null;
-        }
+
+        String studentId = search.getValue().split(", ")[0];
         DirectoryChooser directoryChooser = new DirectoryChooser();
         File file = directoryChooser.showDialog(null);
         Student student = course.getStudentByNameOrId(studentId);
-        if (file != null && student != null) {
-            String path = file.getPath();
-            try {
-                WritableWorkbook excelAttendance = Workbook.createWorkbook(new File(path + "/" + student.getName() + "Attendance.xls"));
-                WritableSheet excelSheet = excelAttendance.createSheet("Sheet 1", 0);
-                excelSheet.addCell(new jxl.write.Label(0, 0, "Lecture name"));
-                excelSheet.addCell(new jxl.write.Label(1, 0, "Attendance"));
+        if (file == null || student == null) {
+            return;
+        }
+
+        Path outputFile = Paths.get(file.getPath())
+                .resolve(safeFileName(student.getName()) + "-attendance.xls");
+        try {
+            Files.createDirectories(outputFile.getParent());
+            try (HSSFWorkbook workbook = new HSSFWorkbook();
+                 FileOutputStream output = new FileOutputStream(outputFile.toFile())) {
+                var sheet = workbook.createSheet("Attendance");
+                Row header = sheet.createRow(0);
+                header.createCell(0).setCellValue("Lecture name");
+                header.createCell(1).setCellValue("Attendance");
 
                 ArrayList<Lecture> lectures = course.getLectures();
-
-                for (int i = 0; i < lectures.size(); i++) {
-                    jxl.write.Label label1 = new jxl.write.Label(0, i + 1, lectures.get(i).getName());
-                    excelSheet.addCell(label1);
-
-                    jxl.write.Label label2 = new jxl.write.Label(1, i + 1, (lectures.get(i).getLectureAttendanceById(studentId) != null) ? "1" : "0");
-                    excelSheet.addCell(label2);
+                for (int index = 0; index < lectures.size(); index++) {
+                    Lecture lecture = lectures.get(index);
+                    Row row = sheet.createRow(index + 1);
+                    row.createCell(0).setCellValue(lecture.getName());
+                    row.createCell(1).setCellValue(
+                            lecture.getLectureAttendanceById(studentId) != null ? "Present" : "Absent"
+                    );
                 }
 
-                excelAttendance.write();
-                excelAttendance.close();
-                return excelAttendance;
+                sheet.autoSizeColumn(0);
+                sheet.autoSizeColumn(1);
+                workbook.write(output);
             }
-            catch (IOException | WriteException e)     {
-                MyAlert.errorAlert("Error!" , "Error!", null);
-            }
+        } catch (IOException exception) {
+            MyAlert.errorAlert("Unable to export report", "Error", exception.getMessage());
         }
-        return null;
+    }
+
+    private String safeFileName(String value) {
+        return value == null || value.isBlank()
+                ? "student"
+                : value.replaceAll("[\\\\/:*?\"<>|]", "_");
     }
 
     public void onExcelAttendance() {
